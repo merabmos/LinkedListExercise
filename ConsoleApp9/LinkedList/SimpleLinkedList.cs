@@ -6,27 +6,27 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp9.LinkedList
 {
-    public class SimpleLinkedList
+    public class SimpleLinkedList<T>
     {
-        Node head = null;
-        Node tail = null;
-        public void AddFirst(object item)
+        Node<T> head = null;
+        Node<T> tail = null;
+        public void AddFirst(T item)
         {
             //Get in item and create new node with this item.
 
-            Node newItem = new Node();
+            Node<T> newItem = new Node<T>();
             newItem.item = item;
 
             //if there is no item 
             if (head == null)
             {
-                
+
                 //We have head and tail items
 
                 //We must save this new node to head 
 
                 head = newItem;
-                
+
                 //and to tail
                 //becouse at first if there is no item
                 //first item is first and last.
@@ -39,42 +39,71 @@ namespace ConsoleApp9.LinkedList
             else
             {
                 newItem.next = head;
-                
+
                 head = newItem;
             }
         }
 
-        public void AddLast(object item)
+        public void AddLast(T item)
         {
             //Created new reference
-            Node newItem = new Node();
+            Node<T> newItem = new Node<T>();
             newItem.item = item;
 
             if (head == null)
             {
-                //if there is not added item
-                //we save this reference in head pointer and
-                //into tail pointer
-
                 head = newItem;
                 tail = newItem;
-            
             }
             else
             {
-                // So if tail and head has same reference saved
-                // in this case if tail.next will be newItem also
-                // in head will have this new item because of same reference.
                 tail.next = newItem;
                 tail = newItem;
             }
 
         }
 
+        public void RemoveFirst()
+        {
+            if (head == null)
+            {
+                tail = null;
+                return;
+            }
+
+            head = head.next;
+        }
+
+        public void RemoveLast()
+        {
+            if (head == null)
+                return;
+
+            Node<T> current = head;
+            Node<T> beforeLast = null;
+
+            beforeLast = head;
+
+            while (current.next != null)
+            {
+                beforeLast = current;
+                current = current.next;
+            }
+
+            if (beforeLast != null && beforeLast.next == null)
+                head = null;
+            else
+            {
+                tail = beforeLast;
+                beforeLast.next = null;
+            }
+        }
         public void ReadAll()
         {
+            if (head == null)
+                return;
 
-            Node current = head;
+            Node<T> current = head;
 
             while (current.next != null)
             {

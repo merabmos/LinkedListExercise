@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp9.LinkedList
 {
-    public class Node
+    public class Node<T>
     {
-        public object item = null;
-        public Node next = null;
+        public T item = default(T);
+        public Node<T> next = null;
 
     }
 }
