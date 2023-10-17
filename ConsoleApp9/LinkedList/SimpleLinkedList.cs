@@ -79,24 +79,18 @@ namespace ConsoleApp9.LinkedList
             if (head == null)
                 return;
 
-            Node<T> current = head;
-            Node<T> beforeLast = null;
+            if (head == tail)
+                head = tail = null;
 
-            beforeLast = head;
+            Node<T> previous = head;
 
-            while (current.next != null)
+            while (previous.next != tail)
             {
-                beforeLast = current;
-                current = current.next;
+                previous = previous.next;
             }
 
-            if (beforeLast != null && beforeLast.next == null)
-                head = null;
-            else
-            {
-                tail = beforeLast;
-                beforeLast.next = null;
-            }
+            tail = previous;
+            previous.next = null;
         }
         public void ReadAll()
         {
